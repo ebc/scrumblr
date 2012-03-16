@@ -16,10 +16,19 @@ var sanitizer = require('sanitizer');
 //Map of sids to user_names
 var sids_to_user_names = [];
 
+// register lingua
+lingua  = require('lingua');
+
 app.configure( function(){
 	app.use(express.static(__dirname + '/client'));
 	app.use(express.bodyParser());
 	//app.use(express.cookieParser());
+
+    // Lingua configuration
+    app.use(lingua(app, {
+        defaultLocale: 'en',
+        path: __dirname + '/i18n'
+    }));
 
 	//Cookies are not really needed... but may be in the future?
 	app.use(express.cookieParser());
@@ -31,8 +40,6 @@ app.configure( function(){
 			cookie: { path: '/', httpOnly: true, maxAge: 14400000 }
 		})
 	);
-
-
 });
 
 app.get('/', function(req, res) {
