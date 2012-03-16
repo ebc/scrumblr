@@ -2,16 +2,16 @@ var	http = require('http'),
 		express = require('express'),
 		connect = require('connect');
 
-var 	sys = require('sys');
+var sys = require('sys');
 
-var 	app = express.createServer();
+var app = express.createServer();
 
 var	async = require('async');
 
 var	rooms	= require('./lib/rooms.js');
 var	data	= require('./lib/data.js').db;
 
-var 	sanitizer = require('sanitizer');
+var sanitizer = require('sanitizer');
 
 //Map of sids to user_names
 var sids_to_user_names = [];
@@ -39,8 +39,8 @@ app.get('/', function(req, res) {
 	console.log(req.header('host'));
 	url = req.header('host');
 	res.render('home.jade', {
-		 layout: false,
-		 locals: {url: url}
+		layout: false,
+		locals: {url: url, nome: "douglas", lingua: lingua}
 	});
 });
 
@@ -105,24 +105,24 @@ io.sockets.on('connection', function (client) {
 function scrub( text ) {
 	if (typeof text != "undefined" && text !== null)
 	{
-	
+
 		//clip the string if it is too long
 		if (text.length > 65535)
 		{
 			text = text.substr(0,65535);
 		}
-	
+
 		return sanitizer.sanitize(text);
 	}
 	else
 	{
 		return null;
 	}
-}	
-	
-	
-	
-	client.on('message', function( message ){ 
+}
+
+
+
+	client.on('message', function( message ){
 		console.log(message.action + " -- " + sys.inspect(message.data) );
 
 		if (!message.action)	return;
@@ -302,17 +302,17 @@ function scrub( text ) {
 
 				broadcastToRoom( client, { action: 'addSticker', data: { cardId: cardId, stickerId: stickerId }});
 				break;
-				
+
 			case 'setBoardSize':
 
 				var size = {};
 				size.width = scrub(message.data.width);;
 				size.height = scrub(message.data.height);
-				
+
 				getRoom(client, function(room) {
 					db.setBoardSize( room, size );
 				});
-				
+
 				broadcastToRoom( client, { action: 'setBoardSize', data: size } );
 				break;
 
@@ -374,7 +374,7 @@ function initClient ( client )
 				}
 			);
 		});
-		
+
 		db.getBoardSize( room, function(size) {
 
 			if (size != null) {
