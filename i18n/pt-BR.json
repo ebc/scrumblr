@@ -1,0 +1,12 @@
+{
+    "general": {
+        "by": "feito por"
+    },
+
+    "home": {
+        "board_name": "Nome do novo quadro",
+        "source_code": "c&oacute;digo fonte no",
+        "example_board": "quadro de exemplo",
+        "go": "criar"
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "general": {
+        "by": "by"
+    },
+
+    "home": {
+        "board_name": "name your new board",
+        "source_code": "sourcecode at",
+        "example_board": "example board",
+        "go": "go"
+    }
+}
