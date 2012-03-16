@@ -10,28 +10,28 @@ html(lang="en")
 		title scrumblr
 
 body
-	h1 scrumblr by <a href="http://aliasaria.ca">aliasaria</a>
+	h1 scrumblr !{lingua.general.by} <a href="http://aliasaria.ca">aliasaria</a>
 
 	div.board-outline
 		div#board
 			div#board-doodles
-		
-			
+
+
 			table#board-table.board-table
 				tr
-					td 
+					td
 						h1.home scrumblr.
 						form.home(onsubmit="return go();")
-							label name your new board:
+							label !{lingua.home.board_name}:
 							br
 							input.text(type="text", name="name") formname
-							a#go(onclick="return go();") &nbsp;go.
+							a#go(onclick="return go();") &nbsp;!{lingua.home.go}.
 						<br><br>
-						p.home example board:
+						p.home !{lingua.home.example_board}:
 						p.home!= '<a href="http://' + locals.url + '/demo">' + locals.url + '/demo</a>'
 						<br><br><br>
-						p.home.small sourcecode at <a href="https://github.com/aliasaria/scrumblr">github</a>
-				
+						p.home.small !{lingua.home.source_code} <a href="https://github.com/aliasaria/scrumblr">github</a>
+
 	div.stickers
 		div.sticker#sticker-red
 			image(src="/images/stickers/sticker-red.png")
